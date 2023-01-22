@@ -42,8 +42,9 @@ int main(void)
 		return (1);
 
 	print_list(node);
+	printf("\n");
 	insertion_sort_list(&node);
-	print_list(node);
+	printf("\n");
 	print_list(node);
 	return (0);
 }

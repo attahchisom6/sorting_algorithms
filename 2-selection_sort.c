@@ -22,13 +22,13 @@ void selection_sort(int *array, size_t size)
 	while (p < size)
 	{
 		q = p;
-		for (k = q + 1; k < size; k++)
+		for (k = p + 1; k < size; k++)
 		{
 			if (s[q] > s[k])
 				q = k;
 		}
 
-		if (q != k)
+		if (p != k)
 		{
 			temp = s[p];
 			s[p] = s[q];

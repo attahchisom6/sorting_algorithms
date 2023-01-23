@@ -33,5 +33,8 @@ void insertion_sort_list(listint_t **list);
 /*selection sort algorithimic functions*/
 void selection_sort(int *array, size_t size);
 
+/*quick sort algorithmic function*/
+void quick_sort(int *array, size_t size);
+
 
 #endif

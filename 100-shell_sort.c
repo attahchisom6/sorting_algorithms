@@ -2,7 +2,7 @@
 
 /**
  * shell_sort - a fuction to sort an array whose elements are
- * far apart from each other usinf knuth sequence
+ * far apart from each other using knuth sequence
  * @array:an array of integers
  * @size: size of the array
  *
@@ -11,26 +11,31 @@
 
 void shell_sort(int *array, size_t size)
 {
-	size_t k, p, q;
-	size_t n = size;
-	int *s, temp, flag = 1;
+	size_t k, p;
+	int temp, isfar;
 
-	p = (n ^ 3 - 1) / 2;
+	if (!array)
+		return;
 
-	s = array;
-	for (k = p; k > 0; k--)
+	/*defining knuth sequence*/
+	isfar = 1;
+	while (isfar < size / 3)
+		isfar = isfar * 3 + 1;
+
+	while (isfar > 0)
 	{
-		flag = 0;
-		for (q = 0; q + 1 < n; q++)
+		for (k = isfar; k < size; k++)
 		{
-			if (s[q + 1] < s[q])
+			temp = array[k];
+			p  = k;
+			while (p >= isfar && array[p - isfar] > temp)
 			{
-				temp = s[q + 1];
-				s[q + 1] = s[q];
-				s[q] = temp;
-				print_array(s, size);
-				flag = 1;
+				array[p] = array[p - isfar];
+				p = p - isfar;
 			}
+			array[p] = temp;
 		}
+		isfar = (isfar - 1) / 3;
+		print_array(array, size);
 	}
 }

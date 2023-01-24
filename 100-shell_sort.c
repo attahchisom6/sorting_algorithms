@@ -1,41 +1,46 @@
 #include "sort.h"
-
 /**
- * shell_sort - a fuction to sort an array whose elements are
- * far apart from each other using knuth sequence
- * @array:an array of integers
- * @size: size of the array
+ * shell_sort - function that sorts an array
+ * of integers in ascending order using the
+ * Shell sort algorithm
  *
- * Return:void
+ * @array: input arrray
+ * @size: size of the array
+ * Return: no return
  */
-
 void shell_sort(int *array, size_t size)
 {
-	size_t k, p;
-	int temp, isfar;
+	size_t n = 1;
 
-	if (!array)
-		return;
+	while (n < size)
+		n = (n * 3) + 1;
 
-	/*defining knuth sequence*/
-	isfar = 1;
-	while (isfar < size / 3)
-		isfar = isfar * 3 + 1;
+	while ((n = (n - 1) / 3) > 0)
+		_ssort(array, size, n);
+}
+/**
+ * _ssort - auxiliar function for
+ * shell_sort function
+ * @a: input arrray
+ * @size: size of the array
+ * @n: intervale
+ * Return: no return
+ */
+void _ssort(int *a, int size, int n)
+{
+	int tmp, i, j;
 
-	while (isfar > 0)
+	for (i = 0; (i + n) < size; i++)
 	{
-		for (k = isfar; k < size; k++)
+		for (j = i + n; (j - n) >= 0; j = j - n)
 		{
-			temp = array[k];
-			p  = k;
-			while (p >= isfar && array[p - isfar] > temp)
+			if (a[j] < a[j - n])
 			{
-				array[p] = array[p - isfar];
-				p = p - isfar;
+				tmp = a[j];
+				a[j] = a[j - n];
+				a[j - n] = tmp;
 			}
-			array[p] = temp;
 		}
-		isfar = (isfar - 1) / 3;
-		print_array(array, size);
 	}
+	print_array(a, size);
 }

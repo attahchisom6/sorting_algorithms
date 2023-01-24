@@ -1,40 +1,34 @@
 #include "sort.h"
 
 /**
- * selection_sort - this function will arrange elements of a list in
- * ascending order starting from the smallest element in the list
- * @array: iist/array of integers
- * @size: size of the array
+ * selection_sort - sorts an array of integers in
+ * ascending order using the Selection sort
+ * algorithm
  *
- * Return: void
+ * @array: input array of integers
+ * @size: size of the array
+ * Return: no return
  */
-
 void selection_sort(int *array, size_t size)
 {
-	size_t k, p, q;
-	int *s, temp;
+	int tmp;
+	size_t i, j, m;
 
-	if (array == NULL)
-		return;
-
-	s = array;
-	p = 0;
-	while (p < size)
+	for (i = 0; i < size; i++)
 	{
-		q = p;
-		for (k = p + 1; k < size; k++)
+		m = i;
+		for (j = i + 1; j < size; j++)
 		{
-			if (s[q] > s[k])
-				q = k;
+			if (array[m] > array[j])
+				m = j;
 		}
 
-		if (p != k)
+		if (i != m)
 		{
-			temp = s[p];
-			s[p] = s[q];
-			s[q] = temp;
-			print_array(s, size);
+			tmp = array[i];
+			array[i] = array[m];
+			array[m] = tmp;
+			print_array(array, size);
 		}
-		p++;
 	}
 }

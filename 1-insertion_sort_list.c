@@ -1,40 +1,47 @@
 #include "sort.h"
+#include <stdio.h>
 
 /**
- * insertion_sort_list - a function to sort a double linked list in
- * ascending order
- * @list: double pointer to the first node of the list
+ * insertion_sort_list - sorts a DLL of integers in
+ * ascending order using the insertion sort
+ * algorithm
  *
- * Return: void
+ * @list: doubly linked list
+ * Return: no return
  */
-
 void insertion_sort_list(listint_t **list)
 {
-	listint_t *temp, *head;
+	listint_t *ptr, *tmp;
 
-	if (list == NULL)
+	if (!list)
 		return;
 
-	head = *list;
-	while (head != NULL)
+	ptr = *list;
+
+	while (ptr)
 	{
-		while (head->next && (head->n > head->next->n))
+		while (ptr->next && (ptr->n > ptr->next->n))
 		{
-			temp = head->next;
-			head->next = temp->next;
-			temp->prev = head->prev;
-			if (head->prev)
-				head->prev->next = temp;
-			if (temp->next)
-				temp->next->prev = head;
-			head->prev = temp;
-			temp->next = head;
-			if (temp->prev)
-				head = temp->prev;
+			tmp = ptr->next;
+			ptr->next = tmp->next;
+			tmp->prev = ptr->prev;
+
+			if (ptr->prev)
+				ptr->prev->next = tmp;
+
+			if (tmp->next)
+				tmp->next->prev = ptr;
+
+			ptr->prev = tmp;
+			tmp->next = ptr;
+
+			if (tmp->prev)
+				ptr = tmp->prev;
 			else
-				*list = temp;
+				*list = tmp;
+
 			print_list(*list);
 		}
-		head = head->next;
+		ptr = ptr->next;
 	}
 }
